@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>中山公园</title>
+
+    <meta name="description" content="park">  
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/@editvr/aframe-dialog-popup-component@1.7.2/dist/aframe-dialog-popup-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene inspector="url: https://cdn.jsdelivr.net/gh/aframevr/aframe-inspector@master/dist/aframe-inspector.min.js">
+      <a-assets>     
+        <img id="gate" src="imgs/zhongshan/gate.jpg" crossorigin="anonymous">
+        <img id="entrance" src="imgs/zhognshan/gate/entrance.jpg" crossorigin="anonymous">
+        <img id="moring">
+          <!-- Templates. -->
+        <script id="scene1" type="text/html">
+          <a-sky src="#gate"></a-sky>>
+          <a-plane position="-3 0 -3" width="1" height="1.5" rotation="0 50 0" material="opacity: 0; transparency:true"
+          event-set__enter="_event: mouseenter; _target: #dialog1; visible: true"
+          event-set__leave="_event: mouseleave; _target: #dialog1; visible: false">
+            <a-text id="dialog1" visible="false" font="kelsonsans" value="An elder is writing." width="10" position="-3 1.5 -2" rotation="0 50 0" ></a-text>
+          </a-plane>
+  
+          <a-plane position="60 0 3" width="40" height="8" rotation = "0 -90 0" material="opacity: 0; transparency:true"
+          event-set__enter="_event: mouseenter; _target: #dialog2; visible: true"
+          event-set__leave="_event: mouseleave; _target: #dialog2; visible: false"
+          event-set__click="_event: click; _target: #main; template.src: #scene2">
+          
+            <a-text id="dialog2" visible="false" font="kelsonsans" value="ENTER" width="120" position="0 0 0" rotation="0 0 0" 
+            ></a-text>
+          </a-plane>
+        </script>
+        <script id="entrance" type="text/html">
+          <a-sky src="#entrance"></a-sky>
+        </script>
+      </a-assets>
+      <a-entity id="main" template="src: #scene1"></a-entity>
+ 
+      <a-sound loop="true" autoplay="true" src="src: url(sounds/8033.mp3)" position="0 0 0 "></a-sound>
+      
+      <a-camera>
+        <a-cursor></a-cursor>
+      </a-camera>
+    
+    </a-scene>
+  </body>
+</html>
